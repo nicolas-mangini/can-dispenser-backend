@@ -14,7 +14,7 @@ def dispense_stock(machine_id,stock_value):
      client = mqtt.Client("P1")
      client.tls_set(ca_certs = CERT)
      client.connect(BROKER, PORT)
-     client.publish("dispenser/maquina-{}/stock".format(machine_id), stock_value)
+     client.publish("dispenser/{}/stock".format(machine_id), stock_value)
      print("Update stock to '{}' sent for machine ID: {}".format(stock_value, machine_id))
      client.disconnect()
 
@@ -30,7 +30,7 @@ def dispense(machine_id):
                     }
      json_payload = json.dumps(payload_dict)
 
-     client.publish("dispenser/maquina-{}/dispense_event_ui".format(machine_id), json_payload)
+     client.publish("dispenser/{}/dispense_event_ui".format(machine_id), json_payload)
      print("Dispense event sent for machine ID: {}".format(machine_id))
      client.disconnect()  
 
